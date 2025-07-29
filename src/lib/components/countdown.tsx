@@ -38,7 +38,6 @@ function Countdown({ targetTime }: CountdownProps) {
     // eslint-disable-next-line
   }, [targetTime]);
 
-  // Animation: fade in and scale up on change
   return (
     <div className="flex gap-6 sm:gap-8 lg:gap-12 text-3xl sm:text-7xl lg:text-9xl font-bold">
       {["days", "hours", "minutes", "seconds"].map((unit, idx) => (
