@@ -6,7 +6,7 @@ export default function Home() {
   const target = new Date(now.getFullYear(), 8, 9, 12, 0, 0, 0); // Month is 0-indexed: 8 = September
 
   return (
-    <div className="font-sans flex items-center justify-center w-full h-52 p-8 sm:p-20 bg-black rounded-b-xl overflow-clip text-white">
+    <div className="font-sans flex items-center justify-center w-full h-52 p-8 sm:p-20 bg-black rounded-xl overflow-clip text-white">
       <Countdown targetTime={target} />
     </div>
   );
