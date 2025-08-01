@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { AnimateNumber } from "motion-plus/react";
 
 type CountdownProps = {
   targetTime: Date;
@@ -40,38 +41,17 @@ function Countdown({ targetTime }: CountdownProps) {
 
   return (
     <div className="flex gap-6 sm:gap-8 lg:gap-12 text-3xl sm:text-7xl lg:text-9xl font-bold">
-      {["days", "hours", "minutes", "seconds"].map((unit, idx) => (
+      {["days", "hours", "minutes", "seconds"].map((unit) => (
         <div key={unit} className="flex flex-col items-center">
-          <span
-            className="transition-all duration-300 ease-out transform animate-pulse"
-            style={{
-              animation:
-                timeLeft[unit as keyof typeof timeLeft] !== 0
-                  ? "countdown-pop 0.3s"
-                  : undefined,
-            }}
-          >
+          <AnimateNumber format={{ minimumIntegerDigits: 2 }}>
             {String(timeLeft[unit as keyof typeof timeLeft]).padStart(2, "0")}
-          </span>
+          </AnimateNumber>
 
-          <span className="text-xs uppercase tracking-widest">{unit}</span>
-          {/* {idx < 3 && (
-            <span className="mx-2 text-blue-400 text-4xl font-light">:</span>
-          )} */}
+          <span className="text-xs uppercase tracking-widest -mt-4">
+            {unit}
+          </span>
         </div>
       ))}
-      <style jsx>{`
-        @keyframes countdown-pop {
-          0% {
-            transform: scale(1.2);
-            opacity: 0.7;
-          }
-          100% {
-            transform: scale(1);
-            opacity: 1;
-          }
-        }
-      `}</style>
     </div>
   );
 }
