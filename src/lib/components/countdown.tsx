@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AnimateNumber } from "motion-plus/react";
+import { AnimateNumber, Ticker } from "motion-plus/react";
 
 type CountdownProps = {
   targetTime: Date;
@@ -47,25 +47,39 @@ function Countdown({ targetTime }: CountdownProps) {
   }, [targetTime]);
 
   return (
-    <div className="flex gap-6 sm:gap-8 lg:gap-12 text-3xl sm:text-7xl lg:text-9xl font-bold">
-      {["days", "hours", "minutes", "seconds"].map((unit) => {
-        return (
-          <div key={unit} className="flex flex-col items-center lg:-mt-4">
-            <AnimateNumber
-              className="tracking-wider"
-              format={{ minimumIntegerDigits: 2 }}
+    <div className="relative w-full flex items-center justify-center font-bold font-sans bg-black text-white p-20 h-52 overflow-clip rounded-xl ">
+      <div className="flex gap-2 lg:gap-4 relative z-20">
+        {["days", "hours", "minutes", "seconds"].map((unit) => {
+          return (
+            <div
+              key={unit}
+              className="flex flex-col items-center backdrop-blur-sm border border-white/10 rounded-lg p-3 lg:p-1"
             >
-              {String(timeLeft[unit as keyof typeof timeLeft]).padStart(2, "0")}
-            </AnimateNumber>
+              <AnimateNumber
+                className="tracking-wider text-3xl sm:text-7xl lg:text-9xl"
+                format={{ minimumIntegerDigits: 2 }}
+              >
+                {String(timeLeft[unit as keyof typeof timeLeft]).padStart(
+                  2,
+                  "0"
+                )}
+              </AnimateNumber>
 
-            <div className="text-xs uppercase flex flex-col items-center lg:-mt-4">
-              <span className="">{unit}</span>
-
-              <span className="text-neutral-400">{german[unit]}</span>
+              <div className="text-xs uppercase flex flex-col items-center lg:-mt-4">
+                <span>{unit}</span>
+                <span className="text-neutral-400">{german[unit]}</span>
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
+
+      <div className="absolute inset-0 w-full h-full text-neutral-900 flex items-center justify-center">
+        <Ticker
+          items={["IAA 2025"]}
+          className="text-[200px] translate-y-3 leading-[1em]"
+        />
+      </div>
     </div>
   );
 }
