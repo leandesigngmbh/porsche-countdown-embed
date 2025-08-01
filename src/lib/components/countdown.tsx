@@ -50,7 +50,7 @@ function Countdown({ targetTime }: CountdownProps) {
     <div className="flex gap-6 sm:gap-8 lg:gap-12 text-3xl sm:text-7xl lg:text-9xl font-bold">
       {["days", "hours", "minutes", "seconds"].map((unit) => {
         return (
-          <div key={unit} className="flex flex-col items-center">
+          <div key={unit} className="flex flex-col items-center lg:-mt-4">
             <AnimateNumber
               className="tracking-wider"
               format={{ minimumIntegerDigits: 2 }}
